@@ -1,0 +1,50 @@
+# import = [ "~/.config/alacritty/themes/themes/challenger_deep.toml" ]
+#
+[font]
+# size = 12
+[font.normal]
+family = "MesloLGS NF"
+style = "Regular"
+#
+[window.padding]
+x = 10
+y = 10
+
+[colors.hints.end]
+background = "#A6ADC8"
+foreground = "#1E1E2E"
+
+
+
+
+
+# Default colors
+[colors.primary]
+background = '#1e1c31'
+foreground = '#fbfcfc'
+
+[colors.cursor]
+text = '#fbfcfc'
+cursor = '#ff271d'
+
+# Normal colors
+[colors.normal]
+black   = '#141228'
+red     = '#ff5458'
+green   = '#62d196'
+yellow  = '#ffb378'
+blue    = '#65b2ff'
+magenta = '#906cff'
+cyan    = '#63f2f1'
+white   = '#fbfcfc'
+
+# Bright colors
+[colors.bright]
+black   = '#565575'
+red     = '#ff8080'
+green   = '#95ffa4'
+yellow  = '#ffe9aa'
+blue    = '#91ddff'
+magenta = '#c991e1'
+cyan    = '#aaffe4'
+white   = '#fbfcfc'
