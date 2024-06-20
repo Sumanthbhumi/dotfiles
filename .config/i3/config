@@ -24,7 +24,7 @@ floating_modifier $mod
 tiling_drag modifier titlebar
 
 # Start the Alacritty terminal emulator
-bindsym $mod+Return exec alacritty
+bindsym $mod+Return exec kitty
 
 # Close the focused window
 bindsym $mod+q kill
@@ -66,22 +66,40 @@ bindsym $mod+Shift+space floating toggle
 bindsym $mod+space focus mode_toggle
 
 # Define workspace names
-set $ws1 "1: "
-set $ws2 "2: "
+set $ws1 "1:"
+set $ws2 "2:"
 set $ws3 "3"
-# ... (other workspaces omitted for brevity)
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10:"
 
 # Switch to a workspace
 bindsym $mod+1 workspace number $ws1
 bindsym $mod+2 workspace number $ws2
 bindsym $mod+3 workspace number $ws3
-# ... (other workspace shortcuts omitted)
+bindsym $mod+4 workspace number $ws4
+bindsym $mod+5 workspace number $ws5
+bindsym $mod+6 workspace number $ws6
+bindsym $mod+7 workspace number $ws7
+bindsym $mod+8 workspace number $ws8
+bindsym $mod+9 workspace number $ws9
+bindsym $mod+0 workspace number $ws10
 
 # Move a window to a different workspace
 bindsym $mod+Shift+1 move container to workspace number $ws1
 bindsym $mod+Shift+2 move container to workspace number $ws2
 bindsym $mod+Shift+3 move container to workspace number $ws3
-# ... (other move to workspace shortcuts omitted)
+bindsym $mod+Shift+4 move container to workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5
+bindsym $mod+Shift+6 move container to workspace number $ws6
+bindsym $mod+Shift+7 move container to workspace number $ws7
+bindsym $mod+Shift+8 move container to workspace number $ws8
+bindsym $mod+Shift+9 move container to workspace number $ws9
+bindsym $mod+Shift+0 move container to workspace number $ws10
 
 # Reload the configuration
 bindsym $mod+Shift+c reload
@@ -123,7 +141,7 @@ client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color      
 
 # Configure window borders
 hide_edge_borders both
-for_window [class="^.*"] border pixel 1.5
+for_window [class="^.*"] border pixel 0
 hide_edge_borders both
 
 # Configure the i3 bar
@@ -145,16 +163,35 @@ bindsym XF86AudioLowerVolume exec --no-startup-id qdbus6 org.kde.kglobalaccel /c
 bindsym XF86AudioMute exec --no-startup-id qdbus6 org.kde.kglobalaccel /component/kmix invokeShortcut "mute"
 bindsym XF86AudioMicMute exec --no-startup-id qdbus6 org.kde.kglobalaccel /component/kmix invokeShortcut "mic_mute"
 
+
+# Plasma compatibility improvements
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="task_dialog"] floating enable
+
+for_window [class="yakuake"] floating enable
+for_window [class="systemsettings"] floating enable
+for_window [class="plasmashell"] floating enable;
+for_window [class="Plasma"] floating enable; border none
+for_window [title="plasma-desktop"] floating enable; border none
+for_window [title="win7"] floating enable; border none
+for_window [class="krunner"] floating enable; border none
+for_window [class="Kmix"] floating enable; border none
+for_window [class="Klipper"] floating enable; border none
+for_window [class="Plasmoidviewer"] floating enable; border none
+for_window [class="(?i)*nextcloud*"] floating disable
+for_window [class="plasmashell" window_type="notification"] border none, move position 70 ppt 81 ppt
+no_focus [class="plasmashell" window_type="notification"]
+
 # Set the desktop wallpaper
-exec_always feh --bg-scale /home/bobby/Pictures/1.jpg
+exec_always feh --bg-scale /home/bobby/Downloads/1.jpg
 
 # Close window shortcut
 bindsym Mod1+F4 kill
 
 # Configure gaps between windows
 gaps inner 9
-gaps outer 0
-gaps top -4
+gaps outer 3
+gaps top -5
 
 # Disable focus follows mouse
 focus_follows_mouse no
@@ -166,4 +203,5 @@ bindsym $mod+Tab workspace back_and_forth
 exec_always --no-startup-id picom -bc --no-fading-openclose --backend glx --blur-method dual_kawase --config $HOME/.config/picom.conf
 
 # run this to make it logout and others to work in kde
-exec_always /home/bobby/fakwin/build/fakwin
+exec_always /home/bobby/fakwin/build/fakwin/build/fakwin
+exec_always autotiling
