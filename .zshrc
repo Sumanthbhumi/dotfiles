@@ -1,4 +1,7 @@
-fastfetch
+# if in tmux do not run fastfetch
+if [ -z "$TMUX" ]; then
+  fastfetch
+fi
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -43,6 +46,8 @@ zinit cdreplay -q
 bindkey -e
 bindkey '^p' history-search-backward
 bindkey '^n' history-search-forward
+bindkey '^H' backward-kill-word
+bindkey '5~' kill-word
 
 # History
 HISTSIZE=5000
@@ -78,13 +83,32 @@ alias mv='mv -i' # Confirm before overwriting something
 alias rm='trash -v' # Move to trash instead of deleting
 alias mkdir='mkdir -p' # Create parent directories if they don't exist
 alias rmd='/bin/rm --recursive --force --verbose' # Remove directory and its contents
-alias la='exa -a --color=auto --icons=auto --sort=name'                # show hidden files
+alias la='ls -ltr'                # show hidden files
 alias ls='ls --color=always' # add colors and file type extensions
 alias lsa='ls -aFh --color=always' # add colors and file type extensions
 alias x='exit' # Quick exit
 alias c='clear'
 alias cd..='cd ..' # Go up one directory
+alias ex='yazi'
+export SUDO_EDITOR="nvim"
+alias "sudoedit"='function _sudoedit(){sudo -e "$1";};_sudoedit'
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 source ~/powerlevel10k/powerlevel10k.zsh-theme
+
+export PATH=$PATH:/usr/lib/jvm/java-22-openjdk/bin
+export EDITOR=nvim
+
+# run rust files with run command
+run() {
+    if [[ $1 == *.rs ]]; then
+        rustc "$1" && "./${1%.rs}"
+    elif [[ $1 == *.rc ]]; then
+        rustc "${1%.*}.rs" && source "$1" && "./${1%.*}"
+    elif [[ $1 == *.java ]]; then
+        javac "$1" && java "${1%.java}"
+    else
+        echo "Please provide a .rs, .rc, or .java file"
+    fi
+}
